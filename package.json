@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/anglajuliusson/dt193g-laboration2.2#readme",
   "dependencies": {
+    "@fastify/mysql": "^5.0.2",
     "fastify": "^5.6.2"
   }
 }
