@@ -15,6 +15,7 @@ API:t stödjer grundläggande CRUD-funktionalitet (Create, Read, Update och Dele
 
 ## Skapa databas och tabell
 
+```sql
 CREATE DATABASE IF NOT EXISTS conserts;
 
 USE conserts;
@@ -24,17 +25,19 @@ CREATE TABLE IF NOT EXISTS conserts (
     artist VARCHAR(255) NOT NULL,
     seen BOOLEAN NOT NULL DEFAULT FALSE
 );
-
+```
 ---
 
 ## Starta servern
-node server.js
 
+```bash
+node server.js
+```
 ---
 
 ## API-endpoints
 
-GET /conserts – hämta alla konserter
-GET /conserts/:id – hämta konsert via id
-POST /conserts – lägg till konsert
-DELETE /conserts/:id – radera konsert
+- GET /conserts – hämta alla konserter
+- GET /conserts/:id – hämta konsert via id
+- POST /conserts – lägg till konsert
+- DELETE /conserts/:id – radera konsert
