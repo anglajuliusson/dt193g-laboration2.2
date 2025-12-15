@@ -51,6 +51,35 @@ export const addConsert = async(req, reply) => {
     }
 };
 
+// Funktion som uppdaterar specifik konsert baserad på ID
+export const updateConsert = async(req, reply) => {
+    let id = req.params.id;
+    try {
+        const { artist, seen } = req.body;
+
+            // Validering: kolla att artist är en icke-tom sträng
+            if (!artist || typeof artist !== 'string' || artist.trim() === '') {
+            return reply.status(400).send({ error: "Artist måste fyllas i korrekt." });
+            }
+        
+            // Validering: kolla att seen är boolean
+            if (typeof seen !== 'boolean') {
+            return reply.status(400).send({ error: "Seen måste vara true eller false." });
+            }
+
+        // SQL-fråga för att uppdatera konsert
+        let consertsData = await excuteQuery(`update conserts set artist=?, seen=? where id=${id}`,
+            [
+                artist, 
+                seen,
+            ]
+        );
+        reply.status(201).send({ message: "Konsert uppdaterad!", consertsData});
+    } catch (err) {
+        reply.status(400).send(err);
+    }
+};
+
 // Funktion som raderar en specifik konsert baserat på ID
 export const deleteConsertById = async(req, reply) => {
     let id = req.params.id;
