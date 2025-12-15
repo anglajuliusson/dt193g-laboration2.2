@@ -4,20 +4,16 @@ import { excuteQuery } from './config/db.js' // Importera hjälpfunktionen för 
 
 const fastify = Fastify({ logger: true }); 
 
-// Declare a route
-fastify.get('/', async function handler (request, reply) {
-  return { hello: 'world' }
-});
-
-// Route som testar anslutningen till MySQL-databasen
-fastify.get('/dbtest', async () => {
-
+// GET route för att hämta all data i databasen
+fastify.get('/conserts', async (req, reply) => {
+    try {
     // Anropar excuteQuery för att skicka SQL till databasen
     // Resultatet returneras som ett Promise och hanteras med await
-    const result = await excuteQuery("SELECT NOW()");
-
-    // Returnerar resultatet från databasen som JSON
-    return { tid: result };
+    let consertsData = await excuteQuery("select * from conserts", []);
+    reply.status(200).send(consertsData);
+    } catch (err) {
+        reply.status(500).send(err);
+    }
   });
 
 // Run the server!
