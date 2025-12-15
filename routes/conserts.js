@@ -22,3 +22,14 @@ export const getConsertById = async(req, reply) => {
         reply.status(500).send(err);
     }
 };
+
+// Funktion som raderar en specifik konsert baserat på ID
+export const deleteConsertById = async(req, reply) => {
+    let id = req.params.id;
+    try {
+        let consertsData = await excuteQuery("delete from conserts where id=?", [id]);
+        reply.status(200).send(consertsData);
+    } catch (err) {
+        reply.status(500).send(err);
+    }
+};
