@@ -7,7 +7,7 @@ const fastify = Fastify({ logger: true });
 
 // Aktivera CORS
 await fastify.register(cors, {
-  origin: '*' // Tillåt alla origins (utveckling)
+  origin: '*', methods: ['GET', 'POST', 'PUT', 'DELETE'] // Tillåt alla origins (utveckling) och alla metoder
 })
 
 // Registrerar alla routes från routes-filen på Fastify-servern
